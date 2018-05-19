@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "dist/who-s-whox",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}
