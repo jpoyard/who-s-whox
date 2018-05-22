@@ -1,15 +1,19 @@
-import { DataSource } from "@angular/cdk/collections";
-import { MatPaginator, MatSort } from "@angular/material";
-import { map } from "rxjs/operators";
-import { Observable, of as observableOf, merge } from "rxjs";
-import { AngularFirestore } from "angularfire2/firestore";
-import { Inject } from "@angular/core";
+import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator, MatSort } from '@angular/material';
+import { map, tap } from 'rxjs/operators';
+import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Inject } from '@angular/core';
 
 // TODO: Replace this with your own data model type
 export interface PeopleDirectoryItem {
   entity: string;
-  forname: string;
   name: string;
+  forname: string;
+  displayName: string;
+  photoURL: string;
+  email: string;
+  phoneNumber: string;
 }
 
 /**
@@ -18,19 +22,34 @@ export interface PeopleDirectoryItem {
  * (including sorting, pagination, and filtering).
  */
 export class PeopleDirectoryDataSource extends DataSource<PeopleDirectoryItem> {
-  data: PeopleDirectoryItem[] = [];
+  private static readonly WINNERS_LIST_NAME = 'winners';
+  private _winners$: BehaviorSubject<
+    PeopleDirectoryItem[]
+  > = new BehaviorSubject<PeopleDirectoryItem[]>([]);
+
+  private _length = 0;
+  public get length(): number {
+    return this._length;
+  }
+  public get winners(): Observable<PeopleDirectoryItem[]> {
+    return this._winners$.asObservable();
+  }
 
   constructor(
     private paginator: MatPaginator,
     private sort: MatSort,
-    private db: AngularFirestore
+    private db: AngularFireDatabase
   ) {
     super();
-    db
-      .collection<PeopleDirectoryItem>(`/winners`)
+    // db
+    //   .collection<PeopleDirectoryItem>(`winners`)
+    //   .valueChanges()
+
+    this.db
+      .list<PeopleDirectoryItem>(PeopleDirectoryDataSource.WINNERS_LIST_NAME)
       .valueChanges()
       .subscribe(
-        (winners: PeopleDirectoryItem[]) => (this.data = winners),
+        (data: PeopleDirectoryItem[]) => this._winners$.next(data),
         (error: any) => console.error(error)
       );
   }
@@ -44,17 +63,21 @@ export class PeopleDirectoryDataSource extends DataSource<PeopleDirectoryItem> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
+      this.winners,
       this.paginator.page,
       this.sort.sortChange
     ];
 
     // Set the paginators length
-    this.paginator.length = this.data.length;
-
-    return merge(...dataMutations).pipe(
+    this.winners.subscribe((data: PeopleDirectoryItem[]) => {
+      this._length = data.length;
+      this.paginator.length = data.length;
+    });
+    return merge(...dataMutations).pipe<PeopleDirectoryItem[]>(
       map(() => {
-        return this.getPagedData(this.getSortedData([...this.data]));
+        return this.getPagedData(
+          this.getSortedData([...this._winners$.getValue()])
+        );
       })
     );
   }
@@ -79,19 +102,25 @@ export class PeopleDirectoryDataSource extends DataSource<PeopleDirectoryItem> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getSortedData(data: PeopleDirectoryItem[]) {
-    if (!this.sort.active || this.sort.direction === "") {
+    if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
 
     return data.sort((a, b) => {
-      const isAsc = this.sort.direction === "asc";
+      const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case "entity":
+        case 'entity':
           return compare(a.entity, b.entity, isAsc);
-        case "name":
+        case 'name':
           return compare(a.name, b.name, isAsc);
-        case "forname":
+        case 'forname':
           return compare(a.forname, b.forname, isAsc);
+        case 'displayName':
+          return compare(a.displayName, b.displayName, isAsc);
+        case 'email':
+          return compare(a.email, b.email, isAsc);
+        case 'phoneNumber':
+          return compare(a.phoneNumber, b.phoneNumber, isAsc);
         default:
           return 0;
       }

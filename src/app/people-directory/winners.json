@@ -1,7 +1,14 @@
 {
   "winners": [
-    { "entity": "Paris", "name": "p1", "forname": "f1" },
-    { "entity": "Groupe", "name": "p2", "forname": "f2" },
-    { "entity": "Luxembourg", "name": "p3", "forname": "f3" }
+    {
+      "entity": "Paris",
+      "displayName": "julien poyard",
+      "forname": "julien",
+      "name": "Poyard",
+      "photoURL":
+        "https://lh3.googleusercontent.com/-bmAvV7SUWhI/AAAAAAAAAAI/AAAAAAAAAAA/DAps0LhBouA/photo.jpg",
+      "email": "julien.poyard@gmail.com",
+      "phoneNumber": null
+    }
   ]
 }
