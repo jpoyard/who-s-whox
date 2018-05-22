@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+  maximum-scale=1.0, user-scalable=no">
 
     <title>Progressive Web App</title>
 
@@ -16,343 +16,373 @@
 
     <!-- Printing and PDF exports -->
     <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="reveal">
-      <div class="slides">
-        <section>
-          <h1>Progressive Web App</h1>
-          <h3>Peut-on avoir l'effet waouh avec les PWA ?</h3>
-          <p>
-            <small>Created by
-              <a href="https://github.com/jpoyard">Julien Poyard</a>
-              <p>
-                OXiane - AperOx du
-                <time datetime="2018-05-30">mercredi, 30 mai 2018</time>
-              </p>
-            </small>
-          </p>
-          <aside class="notes">
-          </aside>
-        </section>
-        <section>
-          <section>
-            <h2>C'est quoi l'effet waouh?</h2>
-          </section>
-          <section>
-            <iframe width="960" height="700"
-              src="https://www.youtube.com/embed/1NFJuc7Bq-c">
-            </iframe>
-            <aside class="notes">
-            </aside>
-          </section>
-          <section>
-            L’effet « waouh » ou « wow » désigne le fait qu’un produit ou
-            service, une expérience ou une campagne publicitaire puisse
-            déclencher chez les consommateurs un effet de surprise, d’admiration
-            ou d’appréciation pouvant notamment se traduire
-            par l’expression « waouh! » ou « wow! ».
-            <aside class="notes">
-            </aside>
-          </section>
-          <section>
-            <h3>L’effet wow est généralement obtenu par :</h3>
-            <ul>
-              <li>une caractéristique forte et innovante du produit ou service</li>
-              <li>un message ou format publicitaire particulièrement impactant</li>
-              <li>une théatralisation du point de vente particulièrement
-                spectaculaire</li>
-            </ul>
-            <hr/>
-              <small>Dans le domaine des caractéristiques produit, on a ainsi
-                beaucoup parlé d’effet « wow » pour les consommateurs
-                découvrant pour la première fois les effets de l’écran 3D de la
-                console Nitendo 3DS lors de son lancement en
-                2011.
-              </small>
-              <aside class="notes">
-              </aside>
+        <div class="slides">
+            <section>
+                <h1>Progressive Web App</h1>
+                <h3>Peut-on avoir l'effet waouh avec les PWA ?</h3>
+                <p>
+                    <small>Created by
+                        <a href="https://github.com/jpoyard">Julien Poyard</a>
+                        <p>
+                            OXiane - AperOx du
+                            <time datetime="2018-05-30">mercredi, 30 mai 2018</time>
+                        </p>
+                    </small>
+                </p>
+                <aside class="notes">
+                </aside>
+            </section>
+            <section data-background="#004d40bd" data-background-transition="zoom">
+                <section>
+                    <h2>C'est quoi l'effet waouh?</h2>
+                </section>
+                <section>
+                    <iframe width="960" height="700" src="https://www.youtube.com/embed/1NFJuc7Bq-c">
+                    </iframe>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <blockquote cite="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/">
+                        <p class="fragment grow highlight-blue">
+                            L’effet « waouh! » ou « wow! »
+                        </p>
+                        <p>désigne le fait qu’un
+                            <span class="fragment highlight-green">produit</span> ou service, une
+                            <span class="fragment highlight-green">expérience</span> ou une campagne publicitaire puisse déclencher chez les consommateurs un effet
+                            de surprise, d’admiration ou d’
+                            <span class="fragment highlight-green">appréciation</span> pouvant notamment se traduire par l’expression
+                        </p>
+                        <p>
+                            <span class="fragment highlight-blue">« waouh! »</span> ou
+                            <span class="fragment highlight-blue">« wow! »</span>.
+                        </p>
+                    </blockquote>
+                    <hr>
+                    <small>
+                        <a href="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/" target="_blank">https://www.definitions-marketing.com/</a>
+                    </small>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <blockquote cite="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/">
+                        <p class="fragment grow highlight-blue">
+                            L’effet « waouh! » ou « wow! »
+                        </p>
+                        <p>est généralement obtenu par</p>
+                        <ul>
+                            <li>une
+                                <span class="fragment highlight-green">caractéristique forte et innovante du produit</span> ou service</li>
+                            <li>un message ou format publicitaire particulièrement
+                                <span class="fragment highlight-green">impactant</span>
+                            </li>
+                            <li>une théatralisation du point de vente particulièrement spectaculaire</li>
+                        </ul>
+                    </blockquote>
+                    <hr/>
+                    <small>Dans le domaine des caractéristiques produit, on a ainsi beaucoup parlé d’effet
+                        <span class="fragment highlight-blue">« wow »</span> pour les consommateurs découvrant pour la
+                        <span class="fragment highlight-blue">première fois</span> les effets de l’écran 3D de la console Nitendo 3DS lors de son lancement en
+                        2011.
+                    </small>
+                    <hr/>
+                    <small>
+                        <a href="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/" target="_blank">https://www.definitions-marketing.com/</a>
+                    </small>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <blockquote cite="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/">
+                        <p class="fragment grow highlight-blue">
+                            L’effet « waouh! » ou « wow! »
+                        </p>
+                        <p style="font-size: 70%">peut selon sa
+                            <span class="fragment highlight-green">nature</span> et son
+                            <span class="fragment highlight-green">contexte d’usage</span>, correspondre à différents objectifs marketing et commerciaux qui peuvent
+                            s’avérer complémentaire :
+                        </p>
+                        <ul style="font-size: 70%">
+                            <li>
+                                <span class="fragment highlight-green">favoriser l’achat</span> classique ou d’
+                                <span class="fragment highlight-green">impulsion</span>
+                            </li>
+                            <li>diminuer la sensibilité au prix et la rationalité consommateur
+                            </li>
+                            <li>favoriser l’
+                                <span class="fragment highlight-green">expérience de marque</span>, l’image et la mémorisation (top of mind)</li>
+                            <li>favoriser la recommandation et les retombées sociales (instagrammabilité)
+                            </li>
+                        </ul>
+                    </blockquote>
+                    <hr/>
+                    <small>
+                        <a href="https://www.definitions-marketing.com/definition/effet-waouh-ou-wow/" target="_blank">https://www.definitions-marketing.com/</a>
+                    </small>
+                    <aside class="notes">
+                    </aside>
+                </section>
+            </section>
+            <section data-background="#880e4fbd" data-background-transition="zoom">
+                <section>
+                    <h2>Applications natives</h2>
+                    <h3>VS</h3>
+                    <h2>Applications Web</h2>
+                </section>
+                <section>
+                    <p>d'un côté, nous avons les
+                        <span class="fragment highlight-green">sites Web</span> accessibles depuis un navigateur …</p>
+                    <ul>
+                        <li>
+                            Le site
+                            <span class="fragment highlight-green">web mobile</span> est un second
+                            <span class="fragment highlight-blue">site</span> qui prend le relais du site principal lorsque l’utilisateur est sur une tablette
+                            ou sur un smartphone</li>
+                        <li>Un site Internet
+                            <span class="fragment highlight-green">« Responsive »</span> est un
+                            <span class="fragment highlight-blue">site</span> conçu avec un Design Responsive, c’est-à-dire dont le design s’adapte à tous les
+                            supports
+                        </li>
+                        <li>
+                            Une
+                            <span class="fragment highlight-green">application Web</span> ou
+                            <span class="fragment highlight-green">Webapp</span> est un
+                            <span class="fragment highlight-blue">site</span> Internet développé pour les mobiles. Par extension, elle désigne aussi une web application
+                            mobile
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        supports : ordinateur, smartphone et tablette
+                    </aside>
+                </section>
+                <section>
+                    <p>… et de l'autre les
+                        <span class="fragment highlight-green">applications native</span> disponibles depuis une plateforme de téléchargement</p>
+                    <ul>
+                        <li>développées pour un
+                            <span class="fragment highlight-green">système d’exploitation spécifique
+                            </span>
+                        </li>
+                        <li>
+                            <span class="fragment highlight-green">téléchargées via des plateformes dédiées</span>, par exemple,
+                            <span class="fragment highlight-blue">App Store</span> ou
+                            <span class="fragment highlight-blue">Play Store</span>
+                        </li>
+                        <li class="fragment fade-up">
+                            Il existe aussi l’
+                            <span class="fragment highlight-green">application hybride</span> qui est une version hybride d’une
+                            <span class="fragment highlight-blue">application web</span> et d’une
+                            <span class="fragment highlight-blue">application native</span>. Elle s’exécute
+                            <span class="fragment highlight-green">via un store</span> et s’adapte à tous les systèmes d’exploitation.
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Système d'exploitation : iOs, Android. Il faut bien distinguer les interfaces accessibles depuis un navigateur Web (site
+                        mobile, site Responsive Design, Webapp) des interfaces accessibles depuis un store (application native,
+                        application hybride).
+                    </aside>
+                </section>
+                <section data-background="https://www.powertrafic.fr/wp-content/uploads/2017/02/interfaces-numeriques.png" data-background-size="contain">
+                </section>
+            </section>
+            <section data-background="#0d47a1bd" data-background-transition="zoom">
+                <section>
+                    <h2>C’est quoi une Progressive Web APP (PWA) ?</h2>
+                </section>
+                <section data-background="http://www.globalmediainsight.com/blog/wp-content/uploads/2016/10/progressive-web-apps.jpg" data-background-size="contain">
+                </section>
+                <section>
+                    <h2>Amélioration progressive</h2>
+                    <q cite="https://www.alsacreations.com/astuce/lire/996-amelioration-progressive-modernizr-et-selecteurs-css.html" style="width: 100%;">A l'inverse du concept de dégradation gracieuse, le principe d’
+                        <span class="fragment highlight-blue">amélioration progressive</span>
+                        ("progressive enhancement" en anglais) est une stratégie de conception web en couches successives, qui permet à chacun d’accéder
+                        au contenu et aux
+                        <span class="fragment highlight-green">fonctionnalités de base</span>
+                        d’une page web en utilisant
+                        <span class="fragment highlight-blue">n’importe quel navigateur</span>, tout en offrant une
+                        <span class="fragment highlight-green">version améliorée</span>
+                        aux utilisateurs disposant de
+                        <span class="fragment highlight-blue">navigateurs plus récents ou plus évolués</span>.
+                    </q>
+                    <hr>
+                    <small>
+                        <a href="https://www.alsacreations.com/astuce/lire/996-amelioration-progressive-modernizr-et-selecteurs-css.html" target="_blank">https://www.alsacreations.com</a>
+                    </small>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <h2>App Shell</h2>
+                    <p>avec les single-page applications (SPA)</p>
+                    <ul style="font-size: 80%;">
+                        <li class="fragment fade-up">utilisé pour
+                            <span class="fragment highlight-green">obtenir du code minimal</span>
+                            <span class="fragment highlight-blue">HTML, CSS et JavaScript</span> requis pour charger l'écran</li>
+                        <li class="fragment fade-up">Le
+                            <span class="fragment highlight-green">contenu dynamique</span> est chargé pour chaque page en utilisant JavaScript</li>
+                        <li class="fragment fade-up">la mise en cache permet d'assurer un
+                            <span class="fragment
+highlight-green">chargement plus performant
+                            </span> lors de visites répétées</li>
+                    </ul>
+                    <div class="fragment fade-up">
+                        <hr>
+                        <small>Cela signifie que l'application n'est pas chargée à chaque visite de l'utilisateur.</small>
+                        <small>Seul les données dynamiques nécessaire sont chargées.</small>
+                        <hr>
+                        <small>
+                            <a href="https://developers.google.com/web/fundamentals/architecture/app-shell" target="_blank">https://developers.google.com</a>
+                        </small>
+                    </div>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section data-background="https://developers.google.com/web/fundamentals/architecture/images/appshell.png" data-background-size="contain">
+                    <aside class="notes">
+                        En d'autres termes, l'App Shell est similaire au bundle de code que vous publieriez sur un app store lors de la création
+                        d'une application native. Il est le squelette de votre interface utilisateur et les composants de
+                        base nécessaires pour démarrer l'application.
+                    </aside>
+                </section>
+                <section>
+                    <h2>App Shell</h2>
+                    <p>les avantages de cette architecture</p>
+                    <ul style="font-size: 80%;">
+                        <li>
+                            <span class="fragment highlight-green">performances fiables et rapides</span>:
+                            <small>Les visites sont extrêmement rapides. Les éléments statiques et l'interface utilisateur sont
+                                <span class="fragment highlight-blue">mis en cache</span> lors de la première visite, et peuvent être rechargés lorsque c'est nécessaire.</small>
+                        </li>
+                        <li>
+                            <span class="fragment highlight-green">Interactions natives</span>:
+                            <small>Les App Shell permettent de créer des applications se comportant
+                                <span class="fragment highlight-blue">comme des applications natives
+                                </span> avec le support hors connection.</small>
+                        </li>
+                        <li>
+                            <span class="fragment highlight-green">Utilisation économique des données</span>:
+                            <small>Les App Shell permettent une utilisation minimale des données puisque
+                                <span class="fragment highlight-blue">seule les données dynamiques</span> seront téléchargées à chaque visite.</small>
+                        </li>
+                    </ul>
+                    <div class="fragment fade-up">
+                        <hr>
+                        <small>
+                            <a href="https://developers.google.com/web/fundamentals/architecture/app-shell" target="_blank">https://developers.google.com</a>
+                        </small>
+                    </div>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section data-background="https://www.powertrafic.fr/wp-content/uploads/2017/02/pwa-service-workers.png" data-background-size="contain">
+                    <h3 class="fragment fade-up hljs">les services worker</h3>
+                    <div class="fragment fade-up hljs" style="word-wrap: break-word;">L'architecture App Shell s’appuie sur les Service Workers, ce sont des scripts
+                        <ul>
+                            <li class="fragment fade-up">qui fonctionnent en parallèle de la page Web</li>
+                            <li class="fragment fade-up">qui permettent le mode hors-ligne</li>
+                            <li class="fragment fade-up">qui envoient des notifications</li>
+                            <li class="fragment fade-up">qui mettent à jour les contenus en arrière-plan</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2>.manifest</h2>
+                    https://www.powertrafic.fr/progressive-web-apps-web-mobile/ https://developers.google.com/web/fundamentals/web-app-manifest/
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <h2>les API Push</h2>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <h2>et les autres API</h2>
+                    <aside class="notes">
+                    </aside>
+                </section>
+                <section>
+                    <h3>API Géolocalisation</h3>
+                    <h3>API UserMedia</h3>
+                    <h3>API Battery</h3>
+                    <aside class="notes">
+                    </aside>
+                </section>
             </section>
             <section>
-              <p>Selon sa nature et son contexte d’usage (produit, magasin,
-                publicité, etc.), l’effet waouh peut correspondre à
-                différents objectifs marketing et commerciaux qui peuvent
-                s’avérer complémentaire :</p>
-              <ul>
-                <li>favoriser l’achat classique ou d’impulsion</li>
-                <li>diminuer la sensibilité au prix et la rationalité
-                  consommateur</li>
-                <li>favoriser l’expérience de marque, l’image et la mémorisation
-                  (top of mind)</li>
-                <li>favoriser la recommandation et les retombées sociales
-                  (instagrammabilité)</li>
-              </ul>
-              <aside class="notes">
-              </aside>
-            </section>
-          </section>
-          <section>
-            <section>
-              <h2>Les applications natives VS les applications Web</h2>
-            </section>
-            <section
-              data-background="https://www.powertrafic.fr/wp-content/uploads/2017/02/interfaces-numeriques.png"
-              data-background-size="contain">
+                <section>
+                    <h2>Les PWA, le meilleur des deux!</h2>
+                </section>
+                <section>
+                    <h2></h2>
+                </section>
             </section>
             <section>
-              <h4>D'un côté, nous avons les sites Web accessibles depuis un
-                navigateur …</h4>
-              <ul>
-                <li>
-                  <span class="fragment highlight-green">Le site web mobile</span>
-                  est un second
-                  <span class="fragment highlight-blue">site</span> qui prend le
-                  relais du site principal lorsque l’utilisateur est sur une
-                  tablette ou sur un smartphone</li>
-                <li>Un site Internet
-                  <span class="fragment highlight-green">« Responsive »</span>
-                  est un
-                  <span class="fragment highlight-blue">site</span> conçu avec
-                  un Design Responsive, c’est-à-dire dont le design s’adapte à
-                  tous les supports</li>
-                <li>
-                  <span class="fragment highlight-green">Une application Web
-                    (Webapp)</span> est un
-                  <span class="fragment highlight-blue">site</span> Internet
-                  développé pour les mobiles. Par extension, elle désigne aussi
-                  une web application mobile</li>
-              </ul>
-              <aside class="notes">
-                supports : ordinateur, smartphone et tablette
-              </aside>
+                <section>
+                    <h2>Quelques exemples de PWA</h2>
+                </section>
+                <section>
+                    <h2>Le site Angular</h2>
+                    <a href="https://angular.io" target="_blank">https://angular.io</a>
+                </section>
+                <section>
+                    <h2>Le site Kana</h2>
+                    <a href="https://getkana.com/app/" target="_blank">https://getkana.com/app/</a>
+                </section>
+                <section>
+                    <h2>Le site Twitter</h2>
+                    <a href="https://lite.twitter.com/" target="_blank">https://lite.twitter.com/</a>
+                </section>
             </section>
             <section>
-              <h4>… des applications disponibles depuis une plateforme de
-                téléchargement : </h4>
-              <ul>
-                <li>développées pour un
-                  <span class="fragment highlight-green">système d’exploitation
-                    spécifique</span>
-                </li>
-                <li><span class="fragment highlight-green">téléchargées via des
-                  plateformes dédiées</span>,
-                  par exemple,
-                  <span class="fragment highlight-blue">App Store</span> ou
-                  <span class="fragment highlight-blue">Play Store</span>
-                </li>
-              </ul>
-              <div class="fragment fade-up">
-                <hr>
-                <small>Il existe aussi l’
-                  <span class="fragment highlight-green">application hybride</span>
-                  qui est une version hybride d’une
-                  <span class="fragment highlight-blue">application web</span>
-                  et d’une
-                  <span class="fragment highlight-blue">application native</span>.
-                  Elle s’exécute
-                  <span class="fragment highlight-green">via un store</span> et
-                  s’adapte à tous les systèmes d’exploitation.
-                </small>
-              </div>
-              <aside class="notes">
-                Système d'exploitation : iOs, Android. Il faut bien distinguer
-                les interfaces accessibles depuis un navigateur Web (site
-                mobile, site Responsive Design, Webapp) des interfaces
-                accessibles depuis un store (application native, application
-                hybride).
-              </aside>
+                <section>
+                    <h2>myApp, who's whOX</h2>
+                </section>
+                <section>
+                    <small>Angular, Angular CLI, et Angular Materials</small>
+                </section>
+                <section>
+                    <small>Firebase, angularfire2</small>
+                </section>
             </section>
-            <section>
-            </section>
-          </section>
-          <section>
-            <section>
-              <h2>C’est quoi une Progressive Web APP (PWA) ?</h2>
-            </section>
-            <section
-              data-background="http://www.globalmediainsight.com/blog/wp-content/uploads/2016/10/progressive-web-apps.jpg"
-              data-background-size="contain">
-            </section>
-            <section>
-              <h2>Amélioration progressive</h2>
-              <q
-                cite="https://www.alsacreations.com/astuce/lire/996-amelioration-progressive-modernizr-et-selecteurs-css.html"
-                style="width: 100%;">A l'inverse du concept de dégradation
-                gracieuse, le principe d’
-                <span class="fragment highlight-blue">amélioration progressive</span>
-                ("progressive enhancement" en anglais) est une stratégie de
-                conception web en
-                couches successives, qui permet à chacun d’accéder au contenu et
-                aux
-                <span class="fragment highlight-green">fonctionnalités de base</span>
-                d’une page web en utilisant
-                <span class="fragment highlight-blue">n’importe quel navigateur</span>,
-                tout en offrant une
-                <span class="fragment highlight-green">version améliorée</span>
-                aux utilisateurs disposant de
-                <span class="fragment highlight-blue">navigateurs plus récents
-                  ou plus évolués</span>.
-              </q>
-              <aside class="notes">
-              </aside>
-            </section>
-            <section>
-              <h4>les <span class="fragment
-                  highlight-green">App Shell</span> dans le cas des <span
-                  class="fragment
-                  highlight-green">single-page applications (SPA)</span>
-              </h4>
-              <ul>
-                <li>utilisé pour
-                  <span class="fragment highlight-green">obtenir du code minimal</span>
-                  <span class="fragment highlight-blue">HTML</span>, <span
-                    class="fragment highlight-blue">CSS</span> et
-                  <span class="fragment highlight-blue">JavaScript</span> requis
-                  pour charger l'écran</li>
-                <li>Le <span class="fragment highlight-green">contenu dynamique</span>
-                  est chargé pour chaque page en
-                  utilisant JavaScript</li>
-                <li>la mise en cache permet d'assurer un <span class="fragment
-                    highlight-green">chargement plus
-                    performant</span> lors de visites répétées</li>
-              </ul>
-              <div class="fragment fade-up">
-                <hr>
-                <small>Cela signifie que l'application n'est pas
-                  chargé à chaque visite de l'utilisateur. Seul les données
-                  dynamiques nécessaire est chargées.</small>
-              </div>
-              <aside class="notes">
-              </aside>
-            </section>
-            <section
-              data-background="https://developers.google.com/web/fundamentals/architecture/images/appshell.png"
-              data-background-size="contain">
-              <aside class="notes">
-                En d'autres termes, l'App Shell est similaire au bundle de code que vous publieriez 
-                sur un app store lors de la création d'une application native. Il est le squelette 
-                de votre interface utilisateur et les composants de base nécessaires pour démarrer 
-                l'application, mais ne contenant pas de données.
-              </aside>
-            </section>
-            <section>
-              <h4>les avantages d'une architecture <span class="fragment
-                  highlight-blue">App shell</span></h4>
-              <ul>
-                <li>
-                  <span class="fragment highlight-green">performances fiables et rapides</span>: 
-                    <small>Les visites sont extrêmement rapides. 
-                    Les éléments statiques et l'interface utilisateur sont <span class="fragment highlight-blue">mis en cache</span> lors de la première visite, 
-                    et peuvent être rechargés lorsque c'est nécessaire.</small>
-                </li>
-                <li>
-                    <span class="fragment highlight-green">Interactions natives</span>: 
-                    <small>Les App Shell permettent de créer des applications se comportant <span class="fragment highlight-blue">comme des applications 
-                    natives</span> avec le support hors connection.</small>
-                </li><li>
-                    <span class="fragment highlight-green">Utilisation économique des données</span>:
-                    <small>Les App Shell permettent une utilisation minimale des données 
-                    puisque <span class="fragment highlight-blue">seule les données dynamiques</span> seront téléchargées à chaque visite.</small>
-                </li>
-              </ul>
-              <aside class="notes">
-              </aside>
-            </section>
-            <section
-              data-background="https://www.powertrafic.fr/wp-content/uploads/2017/02/pwa-service-workers.png"
-              data-background-size="contain">              
-              <h2 class="fragment fade-up hljs">les services worker</h2>
-              <div class="fragment fade-up hljs" style="word-wrap: break-word;">L'architecture App Shell s’appuie sur les Service Workers, 
-              des scripts qui fonctionnent en parallèle de la page Web. Ils permettent le mode hors-ligne, 
-              l’envoi de notifications ou la mise à jour des contenus en arrière-plan.
-              </div>
-            </section>
-            <section>
-              <h2>.manifest</h2>
-              https://www.powertrafic.fr/progressive-web-apps-web-mobile/
-              <aside class="notes">
-              </aside>
-            </section>
-            <section>
-              <h2>les API Push</h2>
-              <aside class="notes">
-              </aside>
-            </section>
-            <section>
-              <h2>et les autres API</h2>
-              <aside class="notes">
-              </aside>
-            </section>
-            <section>
-              <h3>API Géolocalisation</h3>
-              <h3>API UserMedia</h3>
-              <h3>API Battery</h3>
-              <aside class="notes">
-              </aside>
-            </section>
-          </section>
-          <section>
-            <section>
-              <h2>Les PWA, le meilleur des deux!</h2>
-            </section>
-            <section>
-              <h2></h2>
-            </section>
-          </section>
-          <section>
-            <section>
-              <h2>Quelques exemples de PWA</h2>
-            </section>
-            <section>
-              <h2>Le site Angular</h2>
-              <a href="https://angular.io" target="_blank">https://angular.io</a>
-            </section>
-            <section>
-              <h2>Le site Kana</h2>
-              <a href="https://getkana.com/app/" target="_blank">https://getkana.com/app/</a>
-            </section>
-            <section>
-              <h2>Le site Twitter</h2>
-              <a href="https://lite.twitter.com/" target="_blank">https://lite.twitter.com/</a>
-            </section>
-          </section>
-          <section>
-            <section>
-              <h2>myApp, who's whOX</h2>
-            </section>
-            <section>
-              <small>Angular, Angular CLI, et Angular Materials</small>
-            </section>
-            <section>
-              <small>Firebase, angularfire2</small>
-            </section>
-          </section>
         </div>
-      </div>
+    </div>
 
-      <script src="lib/js/head.min.js"></script>
-      <script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-      <script>
-    // More info about config & dependencies:
-    // - https://github.com/hakimel/reveal.js#configuration
-    // - https://github.com/hakimel/reveal.js#dependencies
-    Reveal.initialize({
-      dependencies: [
-        { src: 'plugin/markdown/marked.js' },
-        { src: 'plugin/markdown/markdown.js' },
-        { src: 'plugin/notes/notes.js', async: true },
-        { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
-      ]
-    });
-      </script>
-    </body>
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            dependencies: [{
+                src: 'plugin/markdown/marked.js'
+            }, {
+                src: 'plugin/markdown/markdown.js'
+            }, {
+                src: 'plugin/notes/notes.js',
+                async: true
+            }, {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }]
+        });
+    </script>
+</body>
 
-  </html>>
+</html>>
