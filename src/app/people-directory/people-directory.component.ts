@@ -1,11 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { PeopleDirectoryDataSource } from './people-directory-datasource';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { WinnerService } from '../winner.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ox-people-directory',
   template: `
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer">
+</mat-form-field>
+
 <div class='mat-elevation-z8'>
   <mat-table #table [dataSource]='dataSource' matSort aria-label='Elements'>
 
@@ -40,33 +47,69 @@ import { AngularFireDatabase } from 'angularfire2/database';
     </ng-container>
 
     <mat-header-row *matHeaderRowDef='displayedColumns'></mat-header-row>
-    <mat-row *matRowDef='let row; columns: displayedColumns;'></mat-row>
+    <mat-row *matRowDef='let row; columns: displayedColumns;' (click)="view(row)"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator
-    [length]='dataSource.length'
-    [pageIndex]='0'
-    [pageSize]='50'
     [pageSizeOptions]='[25, 50, 100, 250]'>
   </mat-paginator>
-</div>`,
-  styles: []
+</div>
+
+<router-outlet></router-outlet>
+`,
+  styles: [
+    `
+mat-row:hover{
+  cursor: pointer;
+}`
+  ]
 })
-export class PeopleDirectoryComponent implements OnInit {
+export class PeopleDirectoryComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: PeopleDirectoryDataSource;
-
-  constructor(private dataBase: AngularFireDatabase) {}
-
+  dataSource = new MatTableDataSource<whoswhox.IWinner>();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['entity', 'name', 'forname', 'email', 'phoneNumber'];
+  displayedColumns = [
+    'entity',
+    // 'displayName',
+    'forname',
+    'name'
+    // 'photoURL',
+    // 'email',
+    // 'phoneNumber'
+  ];
+
+  constructor(
+    private winnerService: WinnerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.dataSource = new PeopleDirectoryDataSource(
-      this.paginator,
-      this.sort,
-      this.dataBase
-    );
+    this.winnerService.winners
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: whoswhox.IWinner[]) => (this.dataSource.data = data));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  view(winner: whoswhox.IWinner) {
+    this.router.navigate([winner.id], {
+      relativeTo: this.route
+    });
   }
 }

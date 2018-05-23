@@ -14,17 +14,25 @@ import {
   MatSortModule,
   MatToolbarModule,
   MatIcon,
-  MatIconModule
+  MatIconModule,
+  MatFormField,
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FormsModule } from '@angular/forms';
+import { WinnerDetailComponent } from './winner-detail/winner-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, PeopleDirectoryComponent],
+  declarations: [AppComponent, PeopleDirectoryComponent, WinnerDetailComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatToolbarModule,
