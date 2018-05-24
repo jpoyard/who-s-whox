@@ -17,7 +17,8 @@ import {
   MatIconModule,
   MatFormField,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatCardModule
 } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -31,6 +32,7 @@ import { WinnerDetailComponent } from './winner-detail/winner-detail.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,

@@ -7,6 +7,5 @@ declare namespace whoswhox {
     displayName: string;
     photoURL: string;
     email: string;
-    phoneNumber: string;
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject, Observable, from } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,21 @@ export class WinnerService {
       );
   }
 
+  hasWinner(id: string): Observable<boolean> {
+    const result = this._winners$
+      .getValue()
+      .filter((winner: whoswhox.IWinner) => winner.id.toString() === id);
+    return from([result.length > 0]);
+  }
+
   getWinner(id: string): Observable<whoswhox.IWinner> {
     const result = this._winners$
       .getValue()
       .filter((winner: whoswhox.IWinner) => winner.id.toString() === id);
     return from(result);
+  }
+
+  addWinner(winner: whoswhox.IWinner): void {
+    this.dataBase.list(WinnerService.NAME).push(winner);
   }
 }

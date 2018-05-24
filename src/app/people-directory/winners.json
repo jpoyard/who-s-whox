@@ -1,14 +1,14 @@
 {
   "winners": [
     {
+      "id": 1,
       "entity": "Paris",
       "displayName": "julien poyard",
       "forname": "julien",
       "name": "Poyard",
       "photoURL":
         "https://lh3.googleusercontent.com/-bmAvV7SUWhI/AAAAAAAAAAI/AAAAAAAAAAA/DAps0LhBouA/photo.jpg",
-      "email": "julien.poyard@gmail.com",
-      "phoneNumber": null
+      "email": "julien.poyard@gmail.com"
     }
   ]
 }

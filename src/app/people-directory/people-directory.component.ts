@@ -34,18 +34,6 @@ import { Router, ActivatedRoute } from '@angular/router';
       <mat-cell *matCellDef='let row'>{{row.forname}}</mat-cell>
     </ng-container>
 
-    <!-- Email Column -->
-    <ng-container matColumnDef='email'>
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef='let row'>{{row.email}}</mat-cell>
-    </ng-container>
-
-     <!-- PhoneNumber Column -->
-     <ng-container matColumnDef='phoneNumber'>
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone</mat-header-cell>
-      <mat-cell *matCellDef='let row'>{{row.phoneNumber}}</mat-cell>
-    </ng-container>
-
     <mat-header-row *matHeaderRowDef='displayedColumns'></mat-header-row>
     <mat-row *matRowDef='let row; columns: displayedColumns;' (click)="view(row)"></mat-row>
   </mat-table>
@@ -70,15 +58,7 @@ export class PeopleDirectoryComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource<whoswhox.IWinner>();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [
-    'entity',
-    // 'displayName',
-    'forname',
-    'name'
-    // 'photoURL',
-    // 'email',
-    // 'phoneNumber'
-  ];
+  displayedColumns = ['entity', 'forname', 'name'];
 
   constructor(
     private winnerService: WinnerService,
@@ -108,8 +88,10 @@ export class PeopleDirectoryComponent implements OnInit, OnDestroy {
   }
 
   view(winner: whoswhox.IWinner) {
-    this.router.navigate([winner.id], {
-      relativeTo: this.route
-    });
+    if (winner && winner.id) {
+      this.router.navigate([winner.id], {
+        relativeTo: this.route
+      });
+    }
   }
 }
