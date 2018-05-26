@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { User } from '@firebase/auth-types';
+import { MessagingService } from './messaging.service';
 
 @Component({
   selector: 'ox-root',
   template: `
+  {{ message | async | json }}
 <div *ngIf="(user | async) as user; else showLogin">
   <mat-toolbar color="primary">
     <span>Who's whOX</span>
@@ -42,9 +44,18 @@ import { User } from '@firebase/auth-types';
   `
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ox';
-  constructor(public userService: UserService) {}
+  message;
+  constructor(
+    private msgService: MessagingService,
+    public userService: UserService
+  ) {}
+  ngOnInit() {
+    this.msgService.getPermission();
+    this.msgService.receiveMessage();
+    this.message = this.msgService.currentMessage;
+  }
   login() {
     this.userService.login();
   }

@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FormsModule } from '@angular/forms';
 import { WinnerDetailComponent } from './winner-detail/winner-detail.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, PeopleDirectoryComponent, WinnerDetailComponent],
@@ -42,7 +43,8 @@ import { WinnerDetailComponent } from './winner-detail/winner-detail.component';
     MatIconModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
