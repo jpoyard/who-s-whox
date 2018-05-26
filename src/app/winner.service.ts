@@ -23,10 +23,17 @@ export class WinnerService {
       );
   }
 
-  hasWinner(id: string): Observable<boolean> {
+  hasWinnerWithThisID(id: string): Observable<boolean> {
     const result = this._winners$
       .getValue()
       .filter((winner: whoswhox.IWinner) => winner.id.toString() === id);
+    return from([result.length > 0]);
+  }
+
+  hasWinnerWithThisEmail(email: string): Observable<boolean> {
+    const result = this._winners$
+      .getValue()
+      .filter((winner: whoswhox.IWinner) => winner.email.toString() === email);
     return from([result.length > 0]);
   }
 
