@@ -1,56 +1,64 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { BehaviorSubject, Observable, from } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take, tap, filter } from 'rxjs/operators';
 import { $ } from 'protractor';
 import { MessagingService } from './messaging.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '@firebase/auth-types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WinnerService {
-  private static readonly NAME = 'winners';
-
-  private _winners$ = new BehaviorSubject<whoswhox.IWinner[]>([]);
-  get winners(): Observable<whoswhox.IWinner[]> {
-    return this._winners$.asObservable();
-  }
+  private static readonly NAME = '/winners';
+  private winnersRef: AngularFireList<whoswhox.IWinner>;
+  public winners: Observable<whoswhox.IWinner[]>;
   constructor(
     private dataBase: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
     private messagingService: MessagingService
   ) {
-    this.dataBase
-      .list<whoswhox.IWinner>(WinnerService.NAME)
-      .valueChanges()
-      .subscribe(
-        (data: whoswhox.IWinner[]) => this._winners$.next(data),
-        (error: any) => console.error(error)
-      );
+    this.afAuth.user.subscribe((user: User) => {
+      if (user && user !== null) {
+        this.addWinner(user);
+        this.winnersRef = this.dataBase.list<whoswhox.IWinner>(
+          WinnerService.NAME
+        );
+        this.winners = this.winnersRef.valueChanges();
+      }
+    });
+
+    this.winnersRef = this.dataBase.list<whoswhox.IWinner>(WinnerService.NAME);
+    this.winners = this.winnersRef.valueChanges();
   }
 
-  hasWinnerWithThisID(id: string): Observable<boolean> {
-    const result = this._winners$
-      .getValue()
-      .filter((winner: whoswhox.IWinner) => winner.id.toString() === id);
-    return from([result.length > 0]);
-  }
-
-  hasWinnerWithThisEmail(email: string): Observable<boolean> {
-    const result = this._winners$
-      .getValue()
-      .filter((winner: whoswhox.IWinner) => winner.email === email);
-    return from([result.length > 0]);
+  private addWinner(user: User): void {
+    this.getWinner(user.uid)
+      .pipe(filter(value => !value || value === null))
+      .subscribe(() => {
+        const winner: whoswhox.IWinner = {
+          id: user.uid,
+          entity: 'Paris', // TODO
+          displayName: user.displayName,
+          forname: user.displayName.split(' ')[0],
+          name: user.displayName.split(' ').reverse()[0],
+          photoURL: user.photoURL,
+          email: user.email,
+          created: new Date().toLocaleString()
+        };
+        this.winnersRef.push(winner);
+        this.messagingService.pushMessage(winner);
+      });
   }
 
   getWinner(id: string): Observable<whoswhox.IWinner> {
-    const result = this._winners$
-      .getValue()
-      .filter((winner: whoswhox.IWinner) => winner.id.toString() === id);
-    return from(result);
-  }
-
-  addWinner(winner: whoswhox.IWinner): void {
-    this.dataBase.list(WinnerService.NAME).push(winner);
-    this.messagingService.pushMessage(winner);
+    return this.dataBase
+      .list<whoswhox.IWinner>(WinnerService.NAME, ref => ref.orderByChild('id'))
+      .valueChanges()
+      .pipe(
+        map(values => values.filter(value => value.id === id)),
+        map(values => values[0])
+      );
   }
 }

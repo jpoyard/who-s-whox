@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { User } from '@firebase/auth-types';
 import { MessagingService } from './messaging.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'ox-root',
@@ -21,8 +22,8 @@ import { MessagingService } from './messaging.service';
   <router-outlet></router-outlet>
 </div>
 <ng-template #showLogin>
-  <p>Please login.</p>
-  <button (click)="login()">Login with Google</button>
+  <h3>Please login.</h3>
+  <button (click)="login()" mat-raised-button color="primary">Login with Google</button>
 </ng-template>
   `,
   styles: [
@@ -51,11 +52,20 @@ export class AppComponent implements OnInit {
     private msgService: MessagingService,
     public userService: UserService
   ) {}
+
   ngOnInit() {
-    this.msgService.getPermission();
-    this.msgService.receiveMessage();
-    this.message = this.msgService.currentMessage;
+    this.userService.user
+      .pipe(filter(user => !!user), take(1))
+      .subscribe(user => {
+        if (user) {
+          this.msgService.getPermission();
+          this.msgService.monitorRefresh();
+          this.msgService.receiveMessage();
+          this.message = this.msgService.currentMessage;
+        }
+      });
   }
+
   login() {
     this.userService.login();
   }

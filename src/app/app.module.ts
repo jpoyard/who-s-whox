@@ -18,7 +18,8 @@ import {
   MatFormField,
   MatFormFieldModule,
   MatInputModule,
-  MatCardModule
+  MatCardModule,
+  MatButtonModule
 } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -38,13 +39,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatButtonModule,
     MatToolbarModule,
     MatSortModule,
     MatIconModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

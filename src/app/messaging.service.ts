@@ -30,6 +30,19 @@ export class MessagingService {
     });
   }
 
+  // Listen for token refresh
+  monitorRefresh() {
+    this.messaging.onTokenRefresh(() => {
+      this.messaging
+        .getToken()
+        .then(refreshedToken => {
+          console.log('Token refreshed.');
+          this.updateToken(refreshedToken);
+        })
+        .catch(err => console.log(err, 'Unable to retrieve new token'));
+    });
+  }
+
   getPermission() {
     this.messaging
       .requestPermission()
@@ -54,13 +67,14 @@ export class MessagingService {
   }
 
   pushMessage(winner: whoswhox.IWinner): void {
-    console.log(firebase.apps);
-    console.log(winner);
     const data = {
       [winner.id]: {
         title: `Un message de ${winner.displayName}`,
-        body: `coucou tout le monde! ${winner.forname}`,
-        icon: winner.photoURL
+        body: `coucou tout le monde! ${
+          winner.forname
+        } - ${new Date().toLocaleString()}`,
+        icon: winner.photoURL,
+        click_action: 'https://who-s-whox.firebaseapp.com/'
       }
     };
     this.database.object('messages/').update(data);
