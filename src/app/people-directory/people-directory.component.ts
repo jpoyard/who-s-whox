@@ -16,19 +16,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 <div class='mat-elevation-z8'>
   <mat-table #table [dataSource]='dataSource' matSort aria-label='Elements'>
 
-    <!-- Entity Column -->
-    <ng-container matColumnDef='entity'>
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Entité</mat-header-cell>
-      <mat-cell *matCellDef='let row'>{{row.entity}}</mat-cell>
+    <!-- displayName Column -->
+    <ng-container matColumnDef='displayName'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prénom/Nom</mat-header-cell>
+      <mat-cell *matCellDef='let row'>{{row.displayName}}</mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- name Column -->
     <ng-container matColumnDef='name'>
       <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
       <mat-cell *matCellDef='let row'>{{row.name}}</mat-cell>
     </ng-container>
 
-    <!-- Forname Column -->
+    <!-- forname Column -->
     <ng-container matColumnDef='forname'>
       <mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</mat-header-cell>
       <mat-cell *matCellDef='let row'>{{row.forname}}</mat-cell>

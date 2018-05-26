@@ -29,18 +29,20 @@ export class UserService {
   }
 
   private addUser(user: User): void {
-    this.winnerService.hasWinner(user.uid).subscribe((hasWinner: boolean) => {
-      if (!hasWinner) {
-        this.winnerService.addWinner({
-          id: user.uid,
-          entity: 'Paris', // TODO
-          displayName: user.displayName,
-          forname: user.displayName.split(' ')[0],
-          name: user.displayName.split(' ').reverse()[0],
-          photoURL: user.photoURL,
-          email: user.email
-        });
-      }
-    });
+    this.winnerService
+      .hasWinnerWithThisEmail(user.email)
+      .subscribe((hasWinner: boolean) => {
+        if (!hasWinner) {
+          this.winnerService.addWinner({
+            id: user.uid,
+            entity: 'Paris', // TODO
+            displayName: user.displayName,
+            forname: user.displayName.split(' ')[0],
+            name: user.displayName.split(' ').reverse()[0],
+            photoURL: user.photoURL,
+            email: user.email
+          });
+        }
+      });
   }
 }

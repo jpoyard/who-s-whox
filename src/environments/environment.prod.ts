@@ -1,4 +1,4 @@
-import { firebase } from "./shared";
+import { firebase } from './shared';
 
 export const environment = {
   production: true,
