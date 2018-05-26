@@ -40,7 +40,8 @@ export class UserService {
             forname: user.displayName.split(' ')[0],
             name: user.displayName.split(' ').reverse()[0],
             photoURL: user.photoURL,
-            email: user.email
+            email: user.email,
+            created: new Date().toLocaleString()
           });
         }
       });

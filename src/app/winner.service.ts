@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { $ } from 'protractor';
+import { MessagingService } from './messaging.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,10 @@ export class WinnerService {
   get winners(): Observable<whoswhox.IWinner[]> {
     return this._winners$.asObservable();
   }
-  constructor(private dataBase: AngularFireDatabase) {
+  constructor(
+    private dataBase: AngularFireDatabase,
+    private messagingService: MessagingService
+  ) {
     this.dataBase
       .list<whoswhox.IWinner>(WinnerService.NAME)
       .valueChanges()
@@ -33,7 +38,7 @@ export class WinnerService {
   hasWinnerWithThisEmail(email: string): Observable<boolean> {
     const result = this._winners$
       .getValue()
-      .filter((winner: whoswhox.IWinner) => winner.email.toString() === email);
+      .filter((winner: whoswhox.IWinner) => winner.email === email);
     return from([result.length > 0]);
   }
 
@@ -46,5 +51,6 @@ export class WinnerService {
 
   addWinner(winner: whoswhox.IWinner): void {
     this.dataBase.list(WinnerService.NAME).push(winner);
+    this.messagingService.pushMessage(winner);
   }
 }

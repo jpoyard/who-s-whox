@@ -10,11 +10,14 @@ import { AngularFireDatabase } from 'angularfire2/database';
   providedIn: 'root'
 })
 export class MessagingService {
-  messaging = firebase.messaging();
-  currentMessage = new BehaviorSubject(null);
+  private messaging = firebase.messaging();
+  private _currentMessage = new BehaviorSubject(null);
+  public get currentMessage() {
+    return this._currentMessage.asObservable();
+  }
 
   constructor(
-    private db: AngularFireDatabase,
+    private database: AngularFireDatabase,
     private afAuth: AngularFireAuth
   ) {}
 
@@ -22,7 +25,7 @@ export class MessagingService {
     this.afAuth.authState.pipe(take(1)).subscribe(user => {
       if (user) {
         const data = { [user.uid]: token };
-        this.db.object('fcmTokens/').update(data);
+        this.database.object('fcmTokens/').update(data);
       }
     });
   }
@@ -46,7 +49,20 @@ export class MessagingService {
   receiveMessage() {
     this.messaging.onMessage(payload => {
       console.log('Message received. ', payload);
-      this.currentMessage.next(payload);
+      this._currentMessage.next(payload);
     });
+  }
+
+  pushMessage(winner: whoswhox.IWinner): void {
+    console.log(firebase.apps);
+    console.log(winner);
+    const data = {
+      [winner.id]: {
+        title: `Un message de ${winner.displayName}`,
+        body: `coucou tout le monde! ${winner.forname}`,
+        icon: winner.photoURL
+      }
+    };
+    this.database.object('messages/').update(data);
   }
 }

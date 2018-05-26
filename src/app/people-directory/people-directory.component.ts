@@ -58,7 +58,7 @@ export class PeopleDirectoryComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource<whoswhox.IWinner>();
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['entity', 'forname', 'name'];
+  displayedColumns = ['displayName', 'forname', 'name'];
 
   constructor(
     private winnerService: WinnerService,

@@ -9,12 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
     <mat-card-header>
       <img src="{{winner.photoURL}}" alt="winner.displayName">
       <mat-card-title>{{winner.displayName}}</mat-card-title>
-      <mat-card-subtitle>{{winner.entity}}</mat-card-subtitle>
+      <mat-card-subtitle>{{winner.email}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+    <!--
       <mat-form-field >
         <input matInput placeholder="email" disabled value="{{winner.email}}">
       </mat-form-field>
+    -->
     </mat-card-content>
     <mat-card-actions>
     </mat-card-actions>
