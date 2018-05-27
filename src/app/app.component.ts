@@ -9,7 +9,6 @@ import { filter, take } from 'rxjs/operators';
 @Component({
   selector: 'ox-root',
   template: `
-  {{ message | async | json }}
 <div *ngIf="(user | async) as user; else showLogin">
   <mat-toolbar color="primary">
     <span>Who's whOX</span>
